@@ -1,17 +1,16 @@
-{% set name = "ajsonrpc" %}
 {% set version = "1.2.0" %}
 
 
 package:
-  name: {{ name|lower }}
+  name: ajsonrpc
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/ajsonrpc-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/a/ajsonrpc/ajsonrpc-{{ version }}.tar.gz
   sha256: 791bac18f0bf0dee109194644f151cf8b7ff529c4b8d6239ac48104a3251a19f
 
 build:
-  number: 0
+  number: 1
   noarch: python
   entry_points:
     - async-json-rpc-server=ajsonrpc.scripts.server:main
@@ -20,9 +19,9 @@ build:
 requirements:
   host:
     - pip
-    - python >=3.5
+    - python {{ python_min }}
   run:
-    - python >=3.5
+    - python >={{ python_min }}
 
 test:
   imports:
@@ -32,6 +31,7 @@ test:
     - async-json-rpc-server --help
   requires:
     - pip
+    - python {{ python_min }}
 
 about:
   home: https://github.com/pavlov99/ajsonrpc
